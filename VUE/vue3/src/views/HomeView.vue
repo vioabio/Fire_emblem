@@ -1,145 +1,248 @@
+<script setup>
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+
+const canvas = ref(null)
+const ctx = ref(null)
+const particlesArray = ref([])
+const animationId = ref(null)
+
+// 粒子效果类
+class Particle {
+  constructor(x, y) {
+    this.x = x
+    this.y = y
+    this.size = Math.random() * 2 + 1
+    this.speedX = (Math.random() - 0.5) * 1.5
+    this.speedY = (Math.random() - 0.5) * 1.5
+  }
+
+  update() {
+    this.y += this.speedY
+    this.x += this.speedX
+  }
+
+  draw() {
+    if (ctx.value) {
+      ctx.value.beginPath()
+      ctx.value.arc(this.x, this.y, this.size, 0, Math.PI * 2)
+      ctx.value.fillStyle = "rgba(255, 255, 255, 0.9)"
+      ctx.value.fill()
+
+      // 添加发光效果
+      ctx.value.shadowBlur = 10
+      ctx.value.shadowColor = "rgba(255, 255, 255, 0.5)"
+    }
+  }
+}
+
+function createParticle() {
+  const x = Math.random() * (canvas.value?.width || 0)
+  const y = Math.random() * (canvas.value?.height || 0)
+  particlesArray.value.push(new Particle(x, y))
+}
+
+function handleParticle() {
+  for (let i = 0; i < particlesArray.value.length; i++) {
+    const particle = particlesArray.value[i]
+    particle.update()
+    particle.draw()
+
+    if (particle.x < 0 || particle.x > (canvas.value?.width || 0) ||
+        particle.y < 0 || particle.y > (canvas.value?.height || 0)) {
+      particlesArray.value.splice(i, 1)
+      i--
+      continue
+    }
+
+    // 重置阴影效果以提高性能
+    if (ctx.value) {
+      ctx.value.shadowBlur = 0
+    }
+
+    for (let j = i; j < particlesArray.value.length; j++) {
+      const dx = particlesArray.value[i].x - particlesArray.value[j].x
+      const dy = particlesArray.value[i].y - particlesArray.value[j].y
+      const distance = Math.sqrt(dx * dx + dy * dy)
+
+      // 增加连线距离和提高透明度
+      if (distance < 150) {
+        if (ctx.value) {
+          ctx.value.beginPath()
+          const opacity = Math.max(0.1, 1 - distance / 150)
+          ctx.value.strokeStyle = `rgba(255, 255, 255, ${opacity})`
+          ctx.value.lineWidth = 0.8
+          ctx.value.moveTo(particlesArray.value[i].x, particlesArray.value[i].y)
+          ctx.value.lineTo(particlesArray.value[j].x, particlesArray.value[j].y)
+          ctx.value.stroke()
+        }
+      }
+    }
+  }
+}
+
+function draw() {
+  if (ctx.value && canvas.value) {
+    ctx.value.clearRect(0, 0, canvas.value.width, canvas.value.height)
+
+    // 增加粒子数量
+    const count = Math.floor((canvas.value.height / 80) * (canvas.value.width / 80))
+    if (particlesArray.value.length < count) {
+      createParticle()
+    }
+
+    handleParticle()
+
+    animationId.value = requestAnimationFrame(draw)
+  }
+}
+
+function handleResize() {
+  if (canvas.value) {
+    canvas.value.width = window.innerWidth
+    canvas.value.height = window.innerHeight
+    particlesArray.value = []
+  }
+}
+
+onMounted(() => {
+  canvas.value = document.getElementById('homeParticleCanvas')
+  if (canvas.value) {
+    canvas.value.width = window.innerWidth
+    canvas.value.height = window.innerHeight
+    ctx.value = canvas.value.getContext('2d')
+
+    console.log('Canvas initialized:', canvas.value.width, 'x', canvas.value.height)
+    console.log('Context:', ctx.value ? 'created' : 'failed')
+
+    // 开始动画
+    draw()
+
+    // 窗口大小改变时重新设置canvas
+    window.addEventListener('resize', handleResize)
+  } else {
+    console.error('Canvas element not found')
+  }
+})
+
+onBeforeUnmount(() => {
+  if (animationId.value) {
+    cancelAnimationFrame(animationId.value)
+  }
+  window.removeEventListener('resize', handleResize)
+})
+</script>
+
 <template>
   <div class="home-container">
-    <section class="hero-section">
-      <h1>欢迎来到火焰纹章百科</h1>
-      <p>探索经典战旗游戏的历史与发展</p>
-      <button class="cta-button" @click="navigateToHistory">开始探索</button>
-    </section>
+    <!-- 粒子效果背景 -->
+    <canvas id="homeParticleCanvas" ref="canvas"></canvas>
 
-    <section class="feature-section">
-      <div class="feature-card" @click="navigateToHistory">
-        <div class="feature-icon">📚</div>
-        <h3>历史沿革</h3>
-        <p>深入了解加贺昭三时代与成广通时代的辉煌历史</p>
+    <!-- 欢迎内容 -->
+    <div class="welcome-content">
+      <h1 class="welcome-title">火焰纹章</h1>
+      <p class="welcome-subtitle">任天堂经典SRPG游戏系列</p>
+      <div class="welcome-description">
+        <p>欢迎来到火焰纹章百科，这里汇集了游戏的历史沿革、作品列表、特色系统介绍等内容。</p>
+        <p>探索这个经典游戏系列的精彩世界，了解其深厚的背景故事和丰富的游戏机制。</p>
       </div>
-      <div class="feature-card" @click="navigateToWorks">
-        <div class="feature-icon">🎮</div>
-        <h3>作品列表</h3>
-        <p>全系列作品介绍与详细解析</p>
-      </div>
-      <div class="feature-card" @click="navigateToSystems">
-        <div class="feature-icon">⚔️</div>
-        <h3>特色系统</h3>
-        <p>战旗、职业、武器、角色养成、支援等核心系统</p>
-      </div>
-      <div class="feature-card" @click="navigateToVersions">
-        <div class="feature-icon">💿</div>
-        <h3>发售版本</h3>
-        <p>各平台版本发布信息与特色</p>
-      </div>
-      <div class="feature-card" @click="navigateToTranslation">
-        <div class="feature-icon">🌏</div>
-        <h3>汉化信息</h3>
-        <p>外星科技、火花狼组等汉化组贡献</p>
-      </div>
-    </section>
+    </div>
   </div>
 </template>
 
-<script setup>
-import { useRouter } from 'vue-router'
-
-const router = useRouter()
-
-const navigateToHistory = () => router.push('/history')
-const navigateToWorks = () => router.push('/works')
-const navigateToSystems = () => router.push('/systems')
-const navigateToVersions = () => router.push('/versions')
-const navigateToTranslation = () => router.push('/translation')
-</script>
-
 <style scoped>
 .home-container {
-  min-height: calc(100vh - 70px - 200px);
-}
-
-.hero-section {
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  padding: 100px 20px;
-  text-align: center;
-}
-
-.hero-section h1 {
-  font-size: 48px;
-  color: #333;
-  margin-bottom: 20px;
-  font-weight: 700;
-}
-
-.hero-section p {
-  font-size: 20px;
-  color: #666;
-  margin-bottom: 40px;
-}
-
-.cta-button {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border: none;
-  padding: 15px 40px;
-  font-size: 18px;
-  border-radius: 30px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.cta-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+/* 粒子效果背景 */
+#homeParticleCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
 }
 
-.feature-section {
-  max-width: 1200px;
-  margin: 80px auto;
-  padding: 0 20px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
-}
-
-.feature-card {
-  background: white;
-  padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+/* 欢迎内容 */
+.welcome-content {
+  position: relative;
+  z-index: 10;
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
+  color: white;
+  padding: 40px;
+  max-width: 800px;
+  animation: fadeIn 1.5s ease-in-out;
 }
 
-.feature-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.feature-icon {
-  font-size: 48px;
+.welcome-title {
+  font-size: 72px;
+  font-weight: 700;
   margin-bottom: 20px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
-.feature-card h3 {
-  color: #333;
-  margin-bottom: 15px;
-  font-size: 22px;
+.welcome-subtitle {
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 30px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-.feature-card p {
-  color: #666;
-  line-height: 1.6;
+.welcome-description {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 30px 40px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.welcome-description p {
+  font-size: 18px;
+  line-height: 1.8;
+  margin: 12px 0;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 @media (max-width: 768px) {
-  .hero-section h1 {
-    font-size: 32px;
+  .welcome-title {
+    font-size: 48px;
   }
 
-  .hero-section p {
+  .welcome-subtitle {
+    font-size: 22px;
+  }
+
+  .welcome-description {
+    padding: 20px 25px;
+  }
+
+  .welcome-description p {
     font-size: 16px;
-  }
-
-  .feature-section {
-    grid-template-columns: 1fr;
+    line-height: 1.6;
   }
 }
 </style>

@@ -1,4 +1,17 @@
 先做个导航栏框架，设置组件路由
 完善基础框架
 
-通过加贺界面学习组件通信
+历史沿革->加贺昭三
+完善人物介绍的简单布局，添加h5语义化标签
+通过加贺界面学习组件通信->创建一个人物简介的子组件
+通过props和emit实现父子组件的通信
+编写三个历代作品的弹窗，实现动态组件渲染
+
+github推送失败：将网络连接从校园网改为手机热点
+
+主界面
+实现一个粒子连线效果，原视频连接：https://www.bilibili.com/video/BV1CP4y1b7Xk?spm_id_from=333.788.recommend_more_video.12&trackid=web_related_0.router-related-2479604-gjmc5.1774777904641.659&vd_source=9f15fb0f99a7a244bc1c1a2a136622dd
+gitee仓库地址：https://gitee.com/flashaxe/webcode/blob/master/particle%20background/index.html
+仅在首页实现了粒子效果
+
+模块化思想制作历代作品

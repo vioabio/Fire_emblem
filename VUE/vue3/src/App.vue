@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import BackgroundView from './components/BackgroundView.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -80,6 +81,9 @@ router.afterEach(() => {
 
 <template>
   <div class="app-container">
+    <!-- 统一背景（非首页显示） -->
+    <BackgroundView v-if="route.path !== '/'" />
+
     <!-- 导航栏 -->
     <header class="navbar">
       <div class="nav-content">
@@ -133,28 +137,8 @@ router.afterEach(() => {
 
     <!-- 页脚 -->
     <footer class="footer">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>关于网站</h3>
-          <p>专注于火焰纹章系列的百科全书，提供详细的游戏历史、角色介绍、系统解析等内容</p>
-        </div>
-        <div class="footer-section">
-          <h3>快速链接</h3>
-          <ul>
-            <li><a href="/">历史沿革</a></li>
-            <li><a href="/works">作品列表</a></li>
-            <li><a href="/systems">特色系统</a></li>
-            <li><a href="/versions">发售版本</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>联系我们</h3>
-          <p>邮箱: fe@fireemblem.com</p>
-          <p>欢迎提供意见和建议</p>
-        </div>
-      </div>
       <div class="footer-bottom">
-        <p>&copy; 2026 火焰纹章百科. 保留所有权利.</p>
+        <p>2026 火焰纹章百科. 保留所有权利.</p>
       </div>
     </footer>
   </div>
@@ -167,10 +151,13 @@ router.afterEach(() => {
   flex-direction: column;
 }
 
-/* 导航栏样式 */
+/* 导航栏样式 - 毛玻璃效果 */
 .navbar {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -310,57 +297,25 @@ router.afterEach(() => {
   flex: 1;
 }
 
-/* 页脚样式 */
+/* 页脚样式 - 毛玻璃效果 */
 .footer {
-  background: #2c3e50;
+  background: rgba(44, 62, 80, 0.2);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   color: white;
-  padding: 60px 20px 20px;
+  padding: 15px 20px;
   margin-top: auto;
-}
-
-.footer-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 40px;
-  margin-bottom: 40px;
-}
-
-.footer-section h3 {
-  font-size: 18px;
-  margin-bottom: 20px;
-  color: #fff;
-}
-
-.footer-section p {
-  color: #bdc3c7;
-  line-height: 1.8;
-}
-
-.footer-section ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.footer-section ul li {
-  margin-bottom: 10px;
-}
-
-.footer-section a {
-  color: #bdc3c7;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.footer-section a:hover {
-  color: #fff;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.1);
 }
 
 .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 20px;
   text-align: center;
 }
 
