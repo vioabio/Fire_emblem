@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>联系我们 - 编程导航</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: #f8f9fa;
+            padding: 20px 0;
+            margin-bottom: 30px;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover, nav a:focus {
+            color: #0056b3;
+            outline: 2px solid #007bff;
+            outline-offset: 2px;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .contact-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border: 1px solid #dee2e6;
+        }
+        
+        .contact-card h3 {
+            color: #495057;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+        }
+        
+        .contact-item {
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            border-left: 4px solid #007bff;
+        }
+        
+        .contact-item a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .contact-item a:hover, .contact-item a:focus {
+            color: #0056b3;
+            outline: 2px solid #007bff;
+            outline-offset: 2px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .social-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        
+        .social-link:hover, .social-link:focus {
+            background: #0056b3;
+            outline: 2px solid #fff;
+            outline-offset: 2px;
+        }
+        
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .social-links {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>联系编程导航</h1>
+            <nav role="navigation" aria-label="主导航">
+                <ul>
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="courses.html">课程</a></li>
+                    <li><a href="tools.html">工具</a></li>
+                    <li><a href="about.html">关于我们</a></li>
+                    <li><a href="contact.html" aria-current="page">联系我们</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="container">
+        <section>
+            <h2>多种联系方式</h2>
+            <p>我们提供多种联系方式，方便您随时与我们沟通。无论是课程咨询、技术支持还是商务合作，我们都会及时回复。</p>
+            
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h3>📧 邮件联系</h3>
+                    <div class="contact-item">
+                        <strong>课程咨询：</strong><br>
+                        <a href="mailto:courses@codefather.cn?subject=课程咨询">courses@codefather.cn</a>
+                    </div>
+                    <div class="contact-item">
+                        <strong>技术支持：</strong><br>
+                        <a href="mailto:support@codefather.cn?subject=技术支持请求&body=请详细描述您遇到的问题">support@codefather.cn</a>
+                    </div>
+                    <div class="contact-item">
+                        <strong>商务合作：</strong><br>
+                        <a href="mailto:business@codefather.cn?subject=商务合作洽谈">business@codefather.cn</a>
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <h3>📱 电话联系</h3>
+                    <div class="contact-item">
+                        <strong>客服热线：</strong><br>
+                        <a href="tel:+86-400-123-4567">400-123-4567</a>
+                        <span class="sr-only">（点击拨打电话）</span>
+                    </div>
+                    <div class="contact-item">
+                        <strong>技术支持：</strong><br>
+                        <a href="tel:+86-010-12345678">010-12345678</a>
+                        <span class="sr-only">（点击拨打电话）</span>
+                    </div>
+                    <div class="contact-item">
+                        <strong>紧急联系：</strong><br>
+                        <a href="sms:+86-138-0000-0000?body=我需要紧急技术支持">138-0000-0000</a>
+                        <span class="sr-only">（点击发送短信）</span>
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <h3>🌐 在线平台</h3>
+                    <div class="contact-item">
+                        <strong>面试准备：</strong><br>
+                        <a href="https://mianshiya.com" target="_blank" rel="noopener noreferrer">面试鸭</a>
+                        <span class="sr-only">（在新窗口打开）</span>
+                    </div>
+                    <div class="contact-item">
+                        <strong>简历制作：</strong><br>
+                        <a href="https://resume.codefather.cn" target="_blank" rel="noopener noreferrer">老鱼简历</a>
+                        <span class="sr-only">（在新窗口打开）</span>
+                    </div>
+                    <div class="contact-item">
+                        <strong>算法学习：</strong><br>
+                        <a href="https://algo.codefather.cn" target="_blank" rel="noopener noreferrer">算法导航</a>
+                        <span class="sr-only">（在新窗口打开）</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>社交媒体</h2>
+            <p>关注我们的社交媒体账号，获取最新的学习资讯和技术分享。</p>
+            <div class="social-links">
+                <a href="https://weixin.qq.com/codefather" target="_blank" rel="noopener noreferrer" class="social-link">
+                    微信公众号
+                    <span class="sr-only">（在新窗口打开）</span>
+                </a>
+                <a href="https://weibo.com/codefather" target="_blank" rel="noopener noreferrer" class="social-link">
+                    新浪微博
+                    <span class="sr-only">（在新窗口打开）</span>
+                </a>
+                <a href="https://space.bilibili.com/codefather" target="_blank" rel="noopener noreferrer" class="social-link">
+                    哔哩哔哩
+                    <span class="sr-only">（在新窗口打开）</span>
+                </a>
+                <a href="https://github.com/codefather" target="_blank" rel="noopener noreferrer" class="social-link">
+                    GitHub
+                    <span class="sr-only">（在新窗口打开）</span>
+                </a>
+            </div>
+        </section>
+    </main>
+    
+    <footer style="background: #f8f9fa; padding: 20px 0; margin-top: 50px;">
+        <div class="container">
+            <p>© 2024 编程导航. 更多学习资源请访问 <a href="https://codefather.cn" target="_blank" rel="noopener noreferrer">编程导航官网</a></p>
+        </div>
+    </footer>
+</body>
+</html>
+

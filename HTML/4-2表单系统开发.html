@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在线课程报名</title>
+</head>
+<body>
+    <h1>Web 开发进阶班报名</h1>
+    <p>加入我们的在线课程，提升你的编程技能。</p>
+    
+    <form action="/course-registration" method="POST" enctype="multipart/form-data">
+        <fieldset>
+            <legend>个人信息</legend>
+            
+            <div>
+                <label for="full-name">姓名：</label>
+                <input type="text" id="full-name" name="fullName" required minlength="2" maxlength="20">
+            </div>
+            
+            <div>
+                <label for="email">邮箱：</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div>
+                <label for="phone">手机号：</label>
+                <input type="tel" id="phone" name="phone" pattern="[0-9]{11}" required>
+            </div>
+            
+            <div>
+                <label for="birth-date">出生日期：</label>
+                <input type="date" id="birth-date" name="birthDate" min="1980-01-01" max="2005-12-31">
+            </div>
+            
+            <div>
+                <label for="personal-website">个人网站：</label>
+                <input type="url" id="personal-website" name="personalWebsite" placeholder="https://yourwebsite.com">
+            </div>
+        </fieldset>
+        
+        <fieldset>
+            <legend>课程选择</legend>
+            
+            <div>
+                <label for="course-track">课程方向：</label>
+                <select id="course-track" name="courseTrack" required>
+                    <option value="">请选择课程方向</option>
+                    <option value="frontend">前端开发</option>
+                    <option value="backend">后端开发</option>
+                    <option value="fullstack">全栈开发</option>
+                    <option value="mobile">移动开发</option>
+                </select>
+            </div>
+            
+            <div>
+                <label for="start-date">开课日期：</label>
+                <input type="date" id="start-date" name="startDate" min="2024-04-01" max="2024-12-31" required>
+            </div>
+            
+            <div>
+                <label for="study-time">每周学习时间：</label>
+                <input type="range" id="study-time" name="studyTime" min="5" max="40" value="20" step="5">
+                <output for="study-time">20</output> 小时
+            </div>
+            
+            <div>
+                <label>学习目标：</label>
+                <input type="checkbox" id="job-ready" name="goals" value="job-ready">
+                <label for="job-ready">求职准备</label>
+                
+                <input type="checkbox" id="skill-upgrade" name="goals" value="skill-upgrade">
+                <label for="skill-upgrade">技能提升</label>
+                
+                <input type="checkbox" id="career-change" name="goals" value="career-change">
+                <label for="career-change">转行发展</label>
+            </div>
+        </fieldset>
+        
+        <fieldset>
+            <legend>技术背景</legend>
+            
+            <div>
+                <label for="experience-level">编程经验：</label>
+                <input type="radio" id="beginner" name="experienceLevel" value="beginner">
+                <label for="beginner">初学者</label>
+                
+                <input type="radio" id="intermediate" name="experienceLevel" value="intermediate">
+                <label for="intermediate">中级</label>
+                
+                <input type="radio" id="advanced" name="experienceLevel" value="advanced">
+                <label for="advanced">高级</label>
+            </div>
+            
+            <div>
+                <label for="resume">简历上传：</label>
+                <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx">
+            </div>
+            
+            <div>
+                <label for="portfolio">作品集：</label>
+                <input type="file" id="portfolio" name="portfolio" accept=".zip,.rar" multiple>
+            </div>
+        </fieldset>
+        
+        <div>
+            <input type="checkbox" id="terms" name="terms" required>
+            <label for="terms">我同意课程条款和退款政策</label>
+        </div>
+        
+        <button type="submit">提交报名</button>
+        <button type="reset">重置表单</button>
+    </form>
+    
+    <script>
+        document.getElementById('study-time').addEventListener('input', function() {
+            document.querySelector('output[for="study-time"]').textContent = this.value;
+        });
+    </script>
+</body>
+</html>
+

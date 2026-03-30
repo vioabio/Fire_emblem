@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能手机产品展示</title>
+</head>
+<body>
+    <header>
+        <h1>全新智能手机</h1>
+        <p>科技与美学的完美结合</p>
+    </header>
+    
+    <main>
+        <section>
+            <h2>产品主图</h2>
+            <picture>
+                <source srcset="phone-hero.webp" type="image/webp">
+                <img src="phone-hero.jpg" 
+                     alt="新款智能手机主图展示">
+            </picture>
+        </section>
+        
+        <section>
+            <h2>产品特色</h2>
+            
+            <figure>
+                <img src="phone-camera-medium.jpg" 
+                     srcset="phone-camera-small.jpg 320w,
+                             phone-camera-medium.jpg 768w,
+                             phone-camera-large.jpg 1024w" 
+                     alt="手机摄像头特写，展示三镜头设计">
+                <figcaption>
+                    <strong>专业三镜头系统</strong>
+                    <br>
+                    超广角、主摄、长焦，满足各种拍摄需求
+                </figcaption>
+            </figure>
+            
+            <figure>
+                <img src="phone-screen-medium.jpg" 
+                     srcset="phone-screen-small.jpg 320w,
+                             phone-screen-medium.jpg 768w,
+                             phone-screen-large.jpg 1024w" 
+                     alt="手机屏幕显示效果展示" 
+                     loading="lazy">
+                <figcaption>
+                    <strong>6.8 英寸 OLED 显示屏</strong>
+                    <br>
+                    色彩鲜艳，细节丰富，带来沉浸式视觉体验
+                </figcaption>
+            </figure>
+            
+            <figure>
+                <img src="phone-battery-medium.jpg" 
+                     srcset="phone-battery-small.jpg 320w,
+                             phone-battery-medium.jpg 768w,
+                             phone-battery-large.jpg 1024w" 
+                     alt="手机电池和充电功能展示" 
+                     loading="lazy">
+                <figcaption>
+                    <strong>5000mAh 超大电池</strong>
+                    <br>
+                    支持 65W 快充，续航无忧
+                </figcaption>
+            </figure>
+        </section>
+    </main>
+</body>
+</html>
+

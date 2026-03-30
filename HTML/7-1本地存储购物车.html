@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>编程导航商店 - 购物车</title>
+
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 150px;
+            background: #f0f0f0;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+        }
+        
+        .product-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .product-price {
+            color: #e74c3c;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .add-to-cart {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .add-to-cart:hover {
+            background: #0056b3;
+        }
+        
+        .cart-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        
+        .cart-item-info {
+            flex: 1;
+        }
+        
+        .cart-item-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .cart-item-price {
+            color: #666;
+        }
+        
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .quantity-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .quantity-btn:hover {
+            background: #5a6268;
+        }
+        
+        .remove-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        .cart-total {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: right;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #dee2e6;
+        }
+        
+        .cart-badge {
+            background: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 8px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>编程导航商店 <span id="cartBadge" class="cart-badge" style="display: none;">0</span></h1>
+
+        
+        <div class="product-grid" id="productGrid">
+            <!-- 商品将在这里动态生成 -->
+        </div>
+
+        
+        <div class="cart-section">
+            <h2>购物车</h2>
+
+            <div id="cartItems">
+                <p>购物车是空的</p>
+
+            </div>
+
+            <div class="cart-total" id="cartTotal">
+                总计：¥0.00
+            </div>
+
+            <button class="add-to-cart" onclick="clearCart()" style="background: #dc3545; margin-top: 10px;">清空购物车</button>
+
+        </div>
+
+    </div>
+
+    
+    <script>
+        // 商品数据
+        const products = [
+            { id: 1, name: '编程导航会员', price: 99.00, emoji: '🎯' },
+            { id: 2, name: '面试鸭题库', price: 59.00, emoji: '🦆' },
+            { id: 3, name: '老鱼简历模板', price: 29.00, emoji: '📄' },
+            { id: 4, name: '算法导航课程', price: 199.00, emoji: '🧮' },
+            { id: 5, name: '剪切助手工具', price: 39.00, emoji: '✂️' },
+            { id: 6, name: '编程学习资料', price: 19.00, emoji: '📚' }
+        ];
+        
+        // 购物车管理类
+        class ShoppingCart {
+            constructor() {
+                this.items = this.loadFromStorage();
+                this.renderProducts();
+                this.renderCart();
+                this.updateCartBadge();
+            }
+            
+            loadFromStorage() {
+                const saved = localStorage.getItem('shoppingCart');
+                return saved ? JSON.parse(saved) : [];
+            }
+            
+            saveToStorage() {
+                localStorage.setItem('shoppingCart', JSON.stringify(this.items));
+            }
+            
+            addToCart(productId) {
+                const product = products.find(p => p.id === productId);
+                if (!product) return;
+                
+                const existingItem = this.items.find(item => item.id === productId);
+                
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    this.items.push({
+                        id: productId,
+                        name: product.name,
+                        price: product.price,
+                        quantity: 1
+                    });
+                }
+                
+                this.saveToStorage();
+                this.renderCart();
+                this.updateCartBadge();
+                this.showNotification(`已添加 "${product.name}" 到购物车`);
+            }
+            
+            removeFromCart(productId) {
+                this.items = this.items.filter(item => item.id !== productId);
+                this.saveToStorage();
+                this.renderCart();
+                this.updateCartBadge();
+            }
+            
+            updateQuantity(productId, change) {
+                const item = this.items.find(item => item.id === productId);
+                if (!item) return;
+                
+                item.quantity += change;
+                
+                if (item.quantity <= 0) {
+                    this.removeFromCart(productId);
+                } else {
+                    this.saveToStorage();
+                    this.renderCart();7-2
+                    this.updateCartBadge();
+                }
+            }
+            
+            clearCart() {
+                this.items = [];
+                this.saveToStorage();
+                this.renderCart();
+                this.updateCartBadge();
+            }
+            
+            getTotal() {
+                return this.items.reduce((total, item) => total + (item.price * item.quantity), 0);
+            }
+            
+            getTotalItems() {
+                return this.items.reduce((total, item) => total + item.quantity, 0);
+            }
+            
+            renderProducts() {
+                const grid = document.getElementById('productGrid');
+                grid.innerHTML = '';
+                
+                products.forEach(product => {
+                    const productCard = document.createElement('div');
+                    productCard.className = 'product-card';
+                    productCard.innerHTML = `
+                        <div class="product-image">${product.emoji}</div>
+
+                        <div class="product-name">${product.name}</div>
+
+                        <div class="product-price">¥${product.price.toFixed(2)}</div>
+
+                        <button class="add-to-cart" onclick="cart.addToCart(${product.id})">
+                            加入购物车
+                        </button>
+
+                    `;
+                    grid.appendChild(productCard);
+                });
+            }
+            
+            renderCart() {
+                const cartItems = document.getElementById('cartItems');
+                const cartTotal = document.getElementById('cartTotal');
+                
+                if (this.items.length === 0) {
+                    cartItems.innerHTML = '<p>购物车是空的</p>';
+                } else {
+                    cartItems.innerHTML = this.items.map(item => `
+                        <div class="cart-item">
+                            <div class="cart-item-info">
+                                <div class="cart-item-name">${item.name}</div>
+
+                                <div class="cart-item-price">¥${item.price.toFixed(2)}</div>
+
+                            </div>
+
+                            <div class="quantity-controls">
+                                <button class="quantity-btn" onclick="cart.updateQuantity(${item.id}, -1)">-</button>
+
+                                <span>${item.quantity}</span>
+
+                                <button class="quantity-btn" onclick="cart.updateQuantity(${item.id}, 1)">+</button>
+
+                                <button class="remove-btn" onclick="cart.removeFromCart(${item.id})">删除</button>
+
+                            </div>
+
+                        </div>
+
+                    `).join('');
+                }
+                
+                cartTotal.textContent = `总计：¥${this.getTotal().toFixed(2)}`;
+            }
+            
+            updateCartBadge() {
+                const badge = document.getElementById('cartBadge');
+                const totalItems = this.getTotalItems();
+                
+                if (totalItems > 0) {
+                    badge.textContent = totalItems;
+                    badge.style.display = 'inline';
+                } else {
+                    badge.style.display = 'none';
+                }
+            }
+            
+            showNotification(message) {
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: #28a745;
+                    color: white;
+                    padding: 15px 20px;
+                    border-radius: 5px;
+                    z-index: 1000;
+                    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+                `;
+                notification.textContent = message;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 2000);
+            }
+        }
+        
+        // 初始化购物车
+        const cart = new ShoppingCart();
+        
+        // 清空购物车函数
+        function clearCart() {
+            if (confirm('确定要清空购物车吗？')) {
+                cart.clearCart();
+            }
+        }
+    </script>
+
+</body>
+
+</html>
+

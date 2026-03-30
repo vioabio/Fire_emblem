@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>老鱼简历 - 个人设置</title>
+
+    <style>
+        .settings-panel {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .setting-item {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+        }
+        
+        .setting-item label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .setting-item input, .setting-item select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .theme-preview {
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .theme-light {
+            background-color: #ffffff;
+            color: #333333;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .theme-dark {
+            background-color: #2c3e50;
+            color: #ffffff;
+            border: 1px solid #34495e;
+        }
+        
+        .save-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .status-message {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="settings-panel">
+        <h1>老鱼简历 - 个人设置</h1>
+
+        <p>这些设置会保存在你的浏览器中，下次访问时会自动恢复。</p>
+
+        
+        <div class="setting-item">
+            <label for="userName">用户名</label>
+
+            <input type="text" id="userName" placeholder="请输入你的用户名">
+        </div>
+
+        
+        <div class="setting-item">
+            <label for="theme">界面主题</label>
+
+            <select id="theme">
+                <option value="light">亮色主题</option>
+
+                <option value="dark">暗色主题</option>
+
+            </select>
+
+            <div id="themePreview" class="theme-preview theme-light">
+                主题预览：这就是你选择的主题效果
+            </div>
+
+        </div>
+
+        
+        <div class="setting-item">
+            <label for="autoSave">自动保存间隔（分钟）</label>
+
+            <input type="number" id="autoSave" min="1" max="60" value="5">
+        </div>
+
+        
+        <div class="setting-item">
+            <label for="language">语言设置</label>
+
+            <select id="language">
+                <option value="zh-CN">简体中文</option>
+
+                <option value="en-US">English</option>
+
+            </select>
+
+        </div>
+
+        
+        <button class="save-btn" onclick="saveSettings()">保存设置</button>
+
+        <button class="save-btn" onclick="loadSettings()" style="background-color: #28a745;">加载设置</button>
+
+        <button class="save-btn" onclick="clearSettings()" style="background-color: #dc3545;">清除设置</button>
+
+        
+        <div id="statusMessage" class="status-message"></div>
+
+    </div>
+
+    
+    <script>
+        // 页面加载时自动加载设置
+        window.onload = function() {
+            loadSettings();
+        };
+        
+        function saveSettings() {
+            const settings = {
+                userName: document.getElementById('userName').value,
+                theme: document.getElementById('theme').value,
+                autoSave: document.getElementById('autoSave').value,
+                language: document.getElementById('language').value,
+                timestamp: new Date().toISOString()
+            };
+            
+            // 保存到 localStorage
+            localStorage.setItem('resumeSettings', JSON.stringify(settings));
+            
+            // 显示保存成功消息
+            showMessage('设置已保存！', 'success');
+            
+            console.log('设置已保存:', settings);
+        }
+        
+        function loadSettings() {
+            const savedSettings = localStorage.getItem('resumeSettings');
+            
+            if (savedSettings) {
+                const settings = JSON.parse(savedSettings);
+                
+                // 恢复各项设置
+                document.getElementById('userName').value = settings.userName || '';
+                document.getElementById('theme').value = settings.theme || 'light';
+                document.getElementById('autoSave').value = settings.autoSave || 5;
+                document.getElementById('language').value = settings.language || 'zh-CN';
+                
+                // 更新主题预览
+                updateThemePreview();
+                
+                showMessage('设置已加载！', 'success');
+                console.log('设置已加载:', settings);
+            } else {
+                showMessage('没有找到保存的设置', 'info');
+            }
+        }
+        
+        function clearSettings() {
+            localStorage.removeItem('resumeSettings');
+            
+            // 重置表单
+            document.getElementById('userName').value = '';
+            document.getElementById('theme').value = 'light';
+            document.getElementById('autoSave').value = 5;
+            document.getElementById('language').value = 'zh-CN';
+            
+            updateThemePreview();
+            showMessage('设置已清除！', 'success');
+        }
+        
+        function updateThemePreview() {
+            const theme = document.getElementById('theme').value;
+            const preview = document.getElementById('themePreview');
+            
+            preview.className = `theme-preview theme-${theme}`;
+        }
+        
+        function showMessage(message, type) {
+            const messageDiv = document.getElementById('statusMessage');
+            messageDiv.textContent = message;
+            messageDiv.className = `status-message ${type}`;
+            messageDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 3000);
+        }
+        
+        // 主题切换时更新预览
+        document.getElementById('theme').addEventListener('change', updateThemePreview);
+        
+        // 定期自动保存（可选功能）
+        setInterval(() => {
+            const userName = document.getElementById('userName').value;
+            if (userName.trim()) {
+                saveSettings();
+            }
+        }, 30000); // 每30秒自动保存一次
+    </script>
+
+</body>
+
+</html>
+

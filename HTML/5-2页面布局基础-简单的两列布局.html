@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>两列布局练习</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #f0f0f0;
+            overflow: hidden;  /* 清除浮动 */
+        }
+        .sidebar {
+            float: left;
+            width: 200px;
+            background-color: #e6f3ff;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .main {
+            margin-left: 200px;  /* 为左侧浮动元素留出空间 */
+            background-color: #fff;
+            padding: 20px;
+            min-height: 400px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h3>侧边栏</h3>
+
+            <ul>
+                <li><a href="#">编程导航</a></li>
+
+                <li><a href="#">面试鸭</a></li>
+
+                <li><a href="#">老鱼简历</a></li>
+
+                <li><a href="#">算法导航</a></li>
+
+            </ul>
+
+        </div>
+
+        <div class="main">
+            <h1>主要内容区域</h1>
+
+            <p>这里是主要内容区域，由程序员鱼皮为你提供最新的技术分享和学习资源。</p>
+
+            <p>你可以在这里找到各种编程教程、项目实战和求职指导。</p>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
+

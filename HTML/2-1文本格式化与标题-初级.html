@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript 异步编程入门 - 编程导航</title>
+</head>
+<body>
+    <article>
+        <h1>JavaScript 异步编程入门指南</h1>
+        
+        <p>大家好，我是程序员鱼皮。今天想和大家分享一下 JavaScript 异步编程的基础知识。异步编程是现代 Web 开发中的 <strong>核心概念</strong> 之一。</p>
+        
+        <h2>什么是异步编程？</h2>
+        
+        <p>异步编程允许程序在等待某个操作完成时，继续执行其他任务。这在处理网络请求、文件读取等 <em>耗时操作</em> 时特别有用。</p>
+        
+        <p>在编程导航项目中，我们大量使用异步编程来处理用户请求和数据加载，这大大提升了用户体验。</p>
+        
+        <h3>Promise 的基本用法</h3>
+        
+        <p>Promise 是处理异步操作的 <strong>现代方式</strong>，下面是一个简单的示例：</p>
+        
+        <pre>
+function fetchUserData(userId) {
+    return new Promise((resolve, reject) => {
+        // 模拟异步请求
+        setTimeout(() => {
+            if (userId) {
+                resolve({
+                    id: userId,
+                    name: "程序员鱼皮",
+                    email: "contact@code-nav.cn"
+                });
+            } else {
+                reject(new Error("用户ID不能为空"));
+            }
+        }, 1000);
+    });
+}
+
+// 使用 Promise
+fetchUserData(123)
+    .then(user => {
+        console.log("用户信息:", user);
+    })
+    .catch(error => {
+        console.error("获取用户信息失败:", error);
+    });
+        </pre>
+        
+        <h3>实际应用建议</h3>
+        
+        <p>在实际开发中，建议结合使用 Promise 和 async/await 语法，这样代码会更加 <em>清晰易读</em>。记住，<strong>异步编程需要大量练习</strong> 才能熟练掌握。</p>
+    </article>
+</body>
+</html>
+

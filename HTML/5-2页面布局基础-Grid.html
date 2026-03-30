@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid 复杂布局练习</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 200px 1fr 150px;
+            grid-template-rows: 80px 1fr 60px;
+            grid-template-areas: 
+                "header header header"
+                "sidebar main aside"
+                "footer footer footer";
+            min-height: 100vh;
+            gap: 1px;
+            background-color: #ddd;
+        }
+        
+        .header {
+            grid-area: header;
+            background-color: #333;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+        }
+        
+        .sidebar {
+            grid-area: sidebar;
+            background-color: #f4f4f4;
+            padding: 1rem;
+        }
+        
+        .main {
+            grid-area: main;
+            background-color: white;
+            padding: 2rem;
+        }
+        
+        .aside {
+            grid-area: aside;
+            background-color: #f9f9f9;
+            padding: 1rem;
+        }
+        
+        .footer {
+            grid-area: footer;
+            background-color: #333;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .nav-list {
+            list-style: none;
+        }
+        
+        .nav-list li {
+            margin: 0.5rem 0;
+        }
+        
+        .nav-list a {
+            color: #333;
+            text-decoration: none;
+            padding: 0.5rem;
+            display: block;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-list a:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .widget {
+            background-color: #e6f3ff;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+        
+        .widget h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .grid-layout {
+                grid-template-columns: 1fr;
+                grid-template-areas: 
+                    "header"
+                    "main"
+                    "sidebar"
+                    "aside"
+                    "footer";
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="grid-layout">
+        <header class="header">
+            <h1>编程导航</h1>
+
+            <nav>
+                <span>程序员鱼皮的技术分享平台</span>
+
+            </nav>
+
+        </header>
+
+        
+        <aside class="sidebar">
+            <h3>导航菜单</h3>
+
+            <ul class="nav-list">
+                <li><a href="#">HTML 教程</a></li>
+
+                <li><a href="#">CSS 教程</a></li>
+
+                <li><a href="#">JavaScript 教程</a></li>
+
+                <li><a href="#">React 教程</a></li>
+
+                <li><a href="#">Vue 教程</a></li>
+
+            </ul>
+
+        </aside>
+
+        
+        <main class="main">
+            <h2>页面布局基础</h2>
+
+            <p>在这个练习中，我们使用 CSS Grid 创建了一个复杂的页面布局。这种布局在现代网站中非常常见，包含了头部、侧边栏、主内容区域、辅助内容和底部。</p>
+
+            
+            <h3>布局特点</h3>
+
+            <ul>
+                <li>头部和底部跨越整个页面宽度</li>
+
+                <li>中间区域分为三列：侧边栏、主内容、辅助内容</li>
+
+                <li>在小屏幕上自动变为单列布局</li>
+
+                <li>使用 Grid 的 grid-template-areas 让布局更直观</li>
+
+            </ul>
+
+            
+            <p>这样的布局为我们提供了很大的灵活性，可以轻松调整各个区域的大小和位置。</p>
+
+        </main>
+
+        
+        <aside class="aside">
+            <div class="widget">
+                <h3>相关链接</h3>
+
+                <ul style="list-style: none;">
+                    <li><a href="https://www.mianshiya.com">面试鸭</a></li>
+
+                    <li><a href="https://www.laoyujianli.com">老鱼简历</a></li>
+
+                </ul>
+
+            </div>
+
+            
+            <div class="widget">
+                <h3>工具推荐</h3>
+
+                <p><a href="https://jianqiezhushou.com">剪切助手</a></p>
+
+                <p><a href="https://algo.codefather.com">算法导航</a></p>
+
+            </div>
+
+        </aside>
+
+        
+        <footer class="footer">
+            <p>© 2024 编程导航 by 程序员鱼皮 | 保留所有权利</p>
+
+        </footer>
+
+    </div>
+
+</body>
+
+</html>
+

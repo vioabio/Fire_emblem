@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>创新产品展示 - 智能学习助手</title>
+</head>
+<body>
+    <header>
+        <h1>智能学习助手</h1>
+        <p>革命性的 AI 驱动学习工具</p>
+        
+        <!-- 背景音乐 -->
+        <audio autoplay loop muted id="backgroundMusic">
+            <source src="ambient-music.ogg" type="audio/ogg">
+            <source src="ambient-music.mp3" type="audio/mpeg">
+        </audio>
+        
+        <button onclick="toggleBackgroundMusic()">背景音乐开/关</button>
+    </header>
+    
+    <main>
+        <section>
+            <h2>产品介绍视频</h2>
+            <p>了解智能学习助手如何改变你的学习方式。</p>
+            
+            <video controls 
+                   width="100%" 
+                   height="400" 
+                   preload="metadata"
+                   playsinline
+                   poster="product-intro-poster.jpg">
+                
+                <!-- 桌面设备高清版本 -->
+                <source src="product-intro-hd.webm" 
+                        type="video/webm" 
+                        media="(min-width: 1024px)">
+                <source src="product-intro-hd.mp4" 
+                        type="video/mp4" 
+                        media="(min-width: 1024px)">
+                
+                <!-- 平板设备标清版本 -->
+                <source src="product-intro-md.webm" 
+                        type="video/webm" 
+                        media="(min-width: 768px) and (max-width: 1023px)">
+                <source src="product-intro-md.mp4" 
+                        type="video/mp4" 
+                        media="(min-width: 768px) and (max-width: 1023px)">
+                
+                <!-- 移动设备压缩版本 -->
+                <source src="product-intro-mobile.webm" 
+                        type="video/webm" 
+                        media="(max-width: 767px)">
+                <source src="product-intro-mobile.mp4" 
+                        type="video/mp4" 
+                        media="(max-width: 767px)">
+                
+                <!-- 字幕支持 -->
+                <track kind="subtitles" 
+                       src="product-intro-zh.vtt" 
+                       srclang="zh-CN" 
+                       label="中文字幕" 
+                       default>
+                <track kind="subtitles" 
+                       src="product-intro-en.vtt" 
+                       srclang="en" 
+                       label="English Subtitles">
+                
+                <!-- 备用内容 -->
+                <div style="text-align: center; padding: 40px; background: #f5f5f5; border-radius: 8px;">
+                    <h3>视频播放不支持</h3>
+                    <p>您的浏览器不支持视频播放功能。</p>
+                    <p>
+                        <a href="product-intro-hd.mp4" download style="margin-right: 20px;">下载高清视频</a>
+                        <a href="product-features.html">查看文字介绍</a>
+                    </p>
+                </div>
+            </video>
+        </section>
+        
+        <section>
+            <h2>用户反馈</h2>
+            <p>听听用户是怎么说的。</p>
+            
+            <div style="margin-bottom: 20px;">
+                <h3>张同学 - 计算机专业大学生</h3>
+                <audio controls preload="metadata">
+                    <source src="feedback-zhang.ogg" type="audio/ogg">
+                    <source src="feedback-zhang.mp3" type="audio/mpeg">
+                    <source src="feedback-zhang.wav" type="audio/wav">
+                    <p>您的浏览器不支持音频播放。<a href="feedback-zhang.mp3">点击下载</a></p>
+                </audio>
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <h3>李老师 - 高中数学教师</h3>
+                <audio controls preload="metadata">
+                    <source src="feedback-li.ogg" type="audio/ogg">
+                    <source src="feedback-li.mp3" type="audio/mpeg">
+                    <p>您的浏览器不支持音频播放。<a href="feedback-li.mp3">点击下载</a></p>
+                </audio>
+            </div>
+        </section>
+        
+        <section>
+            <h2>产品演示</h2>
+            <p>实际操作演示，看看产品是如何工作的。</p>
+            
+            <video controls 
+                   width="100%" 
+                   height="350" 
+                   preload="none"
+                   playsinline>
+                
+                <source src="product-demo.webm" type="video/webm">
+                <source src="product-demo.mp4" type="video/mp4">
+                
+                <track kind="subtitles" 
+                       src="product-demo-zh.vtt" 
+                       srclang="zh-CN" 
+                       label="中文字幕" 
+                       default>
+                
+                <track kind="chapters" 
+                       src="product-demo-chapters.vtt" 
+                       srclang="zh-CN" 
+                       label="章节导航">
+                
+                <p>您的浏览器不支持视频播放。请 <a href="product-demo.mp4">下载视频文件</a> 或访问我们的 <a href="https://demo.example.com">在线演示</a>。</p>
+            </video>
+        </section>
+    </main>
+    
+    <script>
+        function toggleBackgroundMusic() {
+            const audio = document.getElementById('backgroundMusic');
+            if (audio.muted) {
+                audio.muted = false;
+                audio.volume = 0.3;
+            } else {
+                audio.muted = true;
+            }
+        }
+    </script>
+</body>
+</html>
+

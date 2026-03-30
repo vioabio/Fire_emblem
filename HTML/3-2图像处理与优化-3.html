@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自然摄影画廊</title>
+    <link rel="preload" href="gallery-hero.jpg" as="image">
+</head>
+<body>
+    <header>
+        <h1>自然摄影画廊</h1>
+        <p>记录自然之美，分享摄影心得</p>
+    </header>
+    
+    <main>
+        <section>
+            <h2>精选作品</h2>
+            <picture>
+                <source srcset="gallery-hero.webp" type="image/webp">
+                <img src="gallery-hero.jpg" 
+                     alt="雪山日出美景，展示自然摄影的魅力">
+            </picture>
+        </section>
+        
+        <section>
+            <h2>风景摄影</h2>
+            <div class="gallery">
+                <figure>
+                    <img src="landscape1-thumb.jpg" 
+                         srcset="landscape1-thumb.jpg 200w,
+                                 landscape1-medium.jpg 600w,
+                                 landscape1-large.jpg 1200w" 
+                         alt="湖泊倒影，宁静的山水风光" 
+                         loading="lazy">
+                    <figcaption>
+                        <strong>湖光山色</strong>
+                        <br>
+                        <small>拍摄于：2024年3月，青海湖</small>
+                    </figcaption>
+                </figure>
+                
+                <figure>
+                    <img src="landscape2-thumb.jpg" 
+                         srcset="landscape2-thumb.jpg 200w,
+                                 landscape2-medium.jpg 600w,
+                                 landscape2-large.jpg 1200w" 
+                         alt="金秋时节的森林，层林尽染" 
+                         loading="lazy">
+                    <figcaption>
+                        <strong>金秋森林</strong>
+                        <br>
+                        <small>拍摄于：2024年10月，香山</small>
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
+        
+        <section>
+            <h2>野生动物</h2>
+            <div class="gallery">
+                <figure>
+                    <picture>
+                        <source srcset="animal1-thumb.webp" type="image/webp">
+                        <img src="animal1-thumb.jpg" 
+                             alt="草原上的藏羚羊，展现野生动物的自然美" 
+                             loading="lazy">
+                    </picture>
+                    <figcaption>
+                        <strong>草原精灵</strong>
+                        <br>
+                        <small>拍摄于：2024年7月，可可西里</small>
+                    </figcaption>
+                </figure>
+                
+                <figure>
+                    <picture>
+                        <source srcset="animal2-thumb.webp" type="image/webp">
+                        <img src="animal2-thumb.jpg" 
+                             alt="飞翔的白鹭，捕捉动物的动态美" 
+                             loading="lazy">
+                    </picture>
+                    <figcaption>
+                        <strong>白鹭飞翔</strong>
+                        <br>
+                        <small>拍摄于：2024年4月，西湖湿地</small>
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
+

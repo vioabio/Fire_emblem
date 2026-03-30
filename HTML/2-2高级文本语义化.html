@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript 异步编程详解</title>
+</head>
+<body>
+    <article>
+        <header>
+            <h1>JavaScript 异步编程详解</h1>
+            <p>发布时间：<time datetime="2024-01-15T10:30:00">2024 年 1 月 15 日 10:30</time></p>
+        </header>
+        
+        <section>
+            <h2>什么是异步编程？</h2>
+            <p>
+                <dfn>异步编程</dfn>是指程序不按照代码的顺序执行，而是根据某些条件或事件来决定执行顺序的编程方式。
+                在 JavaScript 中，<abbr title="Asynchronous JavaScript and XML">Ajax</abbr> 是异步编程的典型应用。
+            </p>
+            
+            <blockquote>
+                <p>异步编程是现代 JavaScript 开发的核心概念，掌握它对于前端开发者来说至关重要。</p>
+                <footer>—— <cite>程序员鱼皮</cite></footer>
+            </blockquote>
+        </section>
+        
+        <section>
+            <h2>Promise 的使用</h2>
+            <p>
+                要创建一个 Promise，可以使用 <code>new Promise()</code> 构造函数。
+                <del>之前我们使用回调函数处理异步操作</del>
+                <ins>现在推荐使用 Promise 或 async/await</ins>。
+            </p>
+            
+            <p>在控制台中输入 <kbd>console.log("Hello")</kbd> 来测试代码。</p>
+            
+            <p>执行结果会显示：<samp>Hello</samp></p>
+        </section>
+        
+        <section>
+            <h2>时间复杂度分析</h2>
+            <p>
+                这个算法的时间复杂度是 O(n<sup>2</sup>)，空间复杂度是 O(log<sub>2</sub>n)。
+                在算法导航中，我们经常讨论这类性能问题。
+            </p>
+        </section>
+        
+        <footer>
+            <address>
+                <p>作者：程序员鱼皮</p>
+                <p>更多内容请访问：<a href="https://codefather.cn">编程导航</a></p>
+            </address>
+        </footer>
+    </article>
+</body>
+</html>
+

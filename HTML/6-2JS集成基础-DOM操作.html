@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>任务列表 - 编程导航</title>
+
+    <style>
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        
+        .input-group {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        
+        .task-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+        }
+        
+        .add-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        
+        .task-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin-bottom: 5px;
+            border-radius: 4px;
+        }
+        
+        .task-item.completed {
+            background-color: #f8f9fa;
+            text-decoration: line-through;
+            color: #6c757d;
+        }
+        
+        .task-text {
+            flex: 1;
+            margin: 0 10px;
+        }
+        
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>编程导航 - 任务列表</h1>
+
+        
+        <div class="input-group">
+            <input type="text" id="task-input" class="task-input" placeholder="输入新任务...">
+            <button id="add-btn" class="add-btn">添加任务</button>
+
+        </div>
+
+        
+        <div id="task-list"></div>
+
+    </div>
+
+    
+    <script>
+        class TaskManager {
+            constructor() {
+                this.tasks = [];
+                this.taskIdCounter = 1;
+                this.taskInput = document.getElementById('task-input');
+                this.addBtn = document.getElementById('add-btn');
+                this.taskList = document.getElementById('task-list');
+                
+                this.initEventListeners();
+            }
+            
+            initEventListeners() {
+                this.addBtn.addEventListener('click', () => this.addTask());
+                this.taskInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        this.addTask();
+                    }
+                });
+            }
+            
+            addTask() {
+                const taskText = this.taskInput.value.trim();
+                if (taskText === '') {
+                    alert('请输入任务内容');
+                    return;
+                }
+                
+                const task = {
+                    id: this.taskIdCounter++,
+                    text: taskText,
+                    completed: false
+                };
+                
+                this.tasks.push(task);
+                this.taskInput.value = '';
+                this.renderTasks();
+            }
+            
+            toggleTask(taskId) {
+                const task = this.tasks.find(t => t.id === taskId);
+                if (task) {
+                    task.completed = !task.completed;
+                    this.renderTasks();
+                }
+            }
+            
+            deleteTask(taskId) {
+                this.tasks = this.tasks.filter(t => t.id !== taskId);
+                this.renderTasks();
+            }
+            
+            renderTasks() {
+                this.taskList.innerHTML = '';
+                
+                this.tasks.forEach(task => {
+                    const taskElement = this.createTaskElement(task);
+                    this.taskList.appendChild(taskElement);
+                });
+            }
+            
+            createTaskElement(task) {
+                const taskDiv = document.createElement('div');
+                taskDiv.className = `task-item ${task.completed ? 'completed' : ''}`;
+                
+                taskDiv.innerHTML = `
+                    <input type="checkbox" ${task.completed ? 'checked' : ''} 
+                           onchange="taskManager.toggleTask(${task.id})">
+                    <span class="task-text">${task.text}</span>
+
+                    <button class="delete-btn" onclick="taskManager.deleteTask(${task.id})">删除</button>
+
+                `;
+                
+                return taskDiv;
+            }
+        }
+        
+        // 初始化任务管理器
+        const taskManager = new TaskManager();
+    </script>
+
+</body>
+
+</html>
+

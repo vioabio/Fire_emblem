@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人设置 - 面试鸭</title>
+</head>
+<body>
+    <form>
+        <h2>个人设置</h2>
+        
+        <fieldset>
+            <legend>显示设置</legend>
+            <label for="theme-color">主题颜色：</label>
+            <input type="color" id="theme-color" name="theme-color" value="#007bff">
+            
+            <label for="font-size">字体大小：</label>
+            <input type="range" id="font-size" name="font-size" 
+                   min="12" max="20" value="14">
+            <span id="font-size-display">14px</span>
+            
+            <p>主题模式：</p>
+            <input type="radio" id="light" name="theme" value="light" checked>
+            <label for="light">浅色模式</label>
+            <input type="radio" id="dark" name="theme" value="dark">
+            <label for="dark">深色模式</label>
+            <input type="radio" id="auto" name="theme" value="auto">
+            <label for="auto">跟随系统</label>
+        </fieldset>
+        
+        <fieldset>
+            <legend>通知设置</legend>
+            <input type="checkbox" id="email-notify" name="notifications" value="email">
+            <label for="email-notify">邮件通知</label><br>
+            <input type="checkbox" id="push-notify" name="notifications" value="push">
+            <label for="push-notify">推送通知</label><br>
+            <input type="checkbox" id="sms-notify" name="notifications" value="sms">
+            <label for="sms-notify">短信通知</label>
+            
+            <label for="quiet-hours">免打扰时间：</label>
+            <input type="time" id="quiet-hours" name="quiet-hours" value="22:00">
+            到
+            <input type="time" name="quiet-hours-end" value="08:00">
+        </fieldset>
+        
+        <fieldset>
+            <legend>学习偏好</legend>
+            <label for="difficulty">题目难度：</label>
+            <input type="range" id="difficulty" name="difficulty" 
+                   min="1" max="5" value="3">
+            <span id="difficulty-display">中等</span>
+            
+            <label for="study-time">每日学习时间：</label>
+            <select id="study-time" name="study-time">
+                <option value="30">30分钟</option>
+                <option value="60">1小时</option>
+                <option value="120">2小时</option>
+                <option value="180">3小时</option>
+            </select>
+        </fieldset>
+        
+        <button type="submit">保存设置</button>
+        <button type="reset">重置</button>
+    </form>
+</body>
+</html>
+
