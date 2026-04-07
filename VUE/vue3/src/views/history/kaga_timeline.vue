@@ -37,6 +37,7 @@ import Vestaria from '@/assets/img/vestaria.jpg'
   padding: 30px;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  margin-top: 30px;
   margin-bottom: 30px;
 }
 

@@ -15,3 +15,10 @@ gitee仓库地址：https://gitee.com/flashaxe/webcode/blob/master/particle%20ba
 仅在首页实现了粒子效果
 
 模块化思想制作历代作品
+
+提交问题：换行符问题
+* text=auto
+*.vue text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+git会将默认的CRLF格式换行符在提交中转化为多平台兼容的LF格式
