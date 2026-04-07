@@ -1,103 +1,35 @@
-<template>
-  <div class="timeline-page">
-    <!-- 背景图（固定） -->
-    <!-- 是否可以添加随机背景图片 -->
-    <div class="fixed-bg"></div>
-
-    <div class="timeline-container">
-      <!-- 中间的竖线 -->
-      <div class="timeline-line"></div>
-
-      <!-- 封印之剑 -->
-      <div class="timeline-item" :class="{ active: activeItems.has(0) }" :data-index="0">
-        <div class="timeline-content">
-          <div class="image-box">
-            <img src="@/assets/img/封印之剑/封印之剑封面图.jpg" alt="封印之剑">
-            <h2 class="year">2002</h2>
-          </div>
-          <div class="text-box">
-            <h3>《封印之剑》</h3>
-            <p>《火焰之纹章：封印之剑》是火焰纹章系列的GBA首作，延续系列系统并获剧情好评。故事围绕人龙战争后，
-              反派欲解放龙族净化世界，主角罗伊率军反抗。开发中经历制作人离职、剧本重构，
-              最终以类似初代模式赢得好评，进入《FAMI通》白金殿堂。</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 烈火之剑 -->
-      <div class="timeline-item" :class="{ active: activeItems.has(1) }" :data-index="1">
-        <div class="timeline-content">
-          <div class="image-box">
-            <img src="https://picsum.photos/400/250?random=2" alt="烈火之剑">
-            <h2 class="year">2003</h2>
-          </div>
-          <div class="text-box">
-            <h3>《烈火之剑</h3>
-            <p>《烈火之剑》是《封印之剑》的前传，画面表现力更强，剧情温馨感人。
-              系统新增天气与指挥值，创新有限但平衡性佳。人设出色，
-              首部登陆欧美市场，全球销量逾50万。</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 圣魔之光石 -->
-      <div class="timeline-item" :class="{ active: activeItems.has(2) }" :data-index="2">
-        <div class="timeline-content">
-          <div class="image-box">
-            <img src="https://picsum.photos/400/250?random=3" alt="圣魔之光石">
-            <h2 class="year">2004</h2>
-          </div>
-          <div class="text-box">
-            <h3>《圣魔之光石》</h3>
-            <p>《圣魔之光石》以新大陆为舞台，主角兄妹伊弗列姆与艾瑞珂为复国而战。
-              游戏拥有分支剧情与世界地图系统，角色塑造深刻，
-              尤其通过悲剧皇子里昂的故事，将“友情”主题推向高潮。</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 风花雪月 -->
-      <div class="timeline-item" :class="{ active: activeItems.has(3) }" :data-index="3">
-        <div class="timeline-content">
-          <div class="image-box">
-            <img src="https://picsum.photos/400/250?random=3" alt="风花雪月">
-            <h2 class="year">2019</h2>
-          </div>
-          <div class="text-box">
-            <h3>《风花雪月》</h3>
-            <p>《火焰纹章：风花雪月》是系列时隔12年回归家用机的作品。
-              故事背景设定于三国争霸的弗德兰大陆，副标题“风花雪月”体现岁月感。
-              战斗引入“兵队”系统，并大幅强化养成要素以降低策略门槛，配合NS机能实现了画面革新。</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- ENGAGE -->
-      <div class="timeline-item" :class="{ active: activeItems.has(4) }" :data-index="4">
-        <div class="timeline-content">
-          <div class="image-box">
-            <img src="https://picsum.photos/400/250?random=3" alt="ENGAGE">
-            <h2 class="year">2023</h2>
-          </div>
-          <div class="text-box">
-            <h3>《ENGAGE》</h3>
-            <p>《火焰纹章：Engage》的舞台为艾雷欧斯大陆。
-              主角神龙琉尔为阻止邪龙复活而战，可通过戒指与异界英雄“纹章士”结合，
-              获得强大力量，并与各国伙伴共同展开冒险。</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</template>
-
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+
+const router = useRouter()
+const route = useRoute()
 
 const activeItems = ref(new Set())
 
 let observer = null
+
+// 游戏详情路由映射
+const gameRoutes = [
+  '/works/binding-blade',   // 封印之剑
+  '/works/blazing-blade',   // 烈火之剑
+  '/works/sacred-stones',   // 圣魔之光石
+  '/works/three-houses',    // 风花雪月
+  '/works/engage'           // ENGAGE
+]
+
+// 判断是否在子页面
+const isInDetailPage = computed(() => {
+  return route.path !== '/works'
+})
+
+// 点击图片跳转到游戏详情页
+function navigateToGame(index) {
+  const targetRoute = gameRoutes[index]
+  if (targetRoute) {
+    router.push(targetRoute)
+  }
+}
 
 onMounted(() => {
   const items = document.querySelectorAll('.timeline-item')
@@ -133,17 +65,117 @@ onUnmounted(() => {
 })
 </script>
 
+<template>
+  <div class="works-page">
+    <!-- 背景图（固定） -->
+    <div class="fixed-bg"></div>
+
+    <!-- 时间轴容器 - 仅在非详情页显示 -->
+    <div class="timeline-container" v-show="!isInDetailPage">
+      <!-- 中间的竖线 -->
+      <div class="timeline-line"></div>
+
+      <!-- 封印之剑 -->
+      <div class="timeline-item" :class="{ active: activeItems.has(0) }" :data-index="0">
+        <div class="timeline-content">
+          <div class="image-box clickable" @click="navigateToGame(0)">
+            <img src="@/assets/img/封印之剑/封印之剑封面图.jpg" alt="封印之剑">
+            <h2 class="year">2002</h2>
+          </div>
+          <div class="text-box">
+            <h3>《封印之剑》</h3>
+            <p>《火焰之纹章：封印之剑》是火焰纹章系列的GBA首作，延续系列系统并获剧情好评。故事围绕人龙战争后，
+              反派欲解放龙族净化世界，主角罗伊率军反抗。开发中经历制作人离职、剧本重构，
+              最终以类似初代模式赢得好评，进入《FAMI通》白金殿堂。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 烈火之剑 -->
+      <div class="timeline-item" :class="{ active: activeItems.has(1) }" :data-index="1">
+        <div class="timeline-content">
+          <div class="image-box clickable" @click="navigateToGame(1)">
+            <img src="@/assets/img/烈火之剑/烈火之剑封面图.jpg" alt="烈火之剑">
+            <h2 class="year">2003</h2>
+          </div>
+          <div class="text-box">
+            <h3>《烈火之剑</h3>
+            <p>《烈火之剑》是《封印之剑》的前传，画面表现力更强，剧情温馨感人。
+              系统新增天气与指挥值，创新有限但平衡性佳。人设出色，
+              首部登陆欧美市场，全球销量逾50万。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 圣魔之光石 -->
+      <div class="timeline-item" :class="{ active: activeItems.has(2) }" :data-index="2">
+        <div class="timeline-content">
+          <div class="image-box clickable" @click="navigateToGame(2)">
+            <img src="@/assets/img/圣魔之光石/圣魔之光石封面图.jpg" alt="圣魔之光石">
+            <h2 class="year">2004</h2>
+          </div>
+          <div class="text-box">
+            <h3>《圣魔之光石》</h3>
+            <p>《圣魔之光石》以新大陆为舞台，主角兄妹伊弗列姆与艾瑞珂为复国而战。
+              游戏拥有分支剧情与世界地图系统，角色塑造深刻，
+              尤其通过悲剧皇子里昂的故事，将"友情"主题推向高潮。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 风花雪月 -->
+      <div class="timeline-item" :class="{ active: activeItems.has(3) }" :data-index="3">
+        <div class="timeline-content">
+          <div class="image-box clickable" @click="navigateToGame(3)">
+            <img src="@/assets/img/风花雪月/风花雪月封面图.jpg" alt="风花雪月">
+            <h2 class="year">2019</h2>
+          </div>
+          <div class="text-box">
+            <h3>《风花雪月》</h3>
+            <p>《火焰纹章：风花雪月》是系列时隔12年回归家用机的作品。
+              故事背景设定于三国争霸的弗德兰大陆，副标题"风花雪月"体现岁月感。
+              战斗引入"兵队"系统，并大幅强化养成要素以降低策略门槛，配合NS机能实现了画面革新。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ENGAGE -->
+      <div class="timeline-item" :class="{ active: activeItems.has(4) }" :data-index="4">
+        <div class="timeline-content">
+          <div class="image-box clickable" @click="navigateToGame(4)">
+            <img src="@/assets/img/ENGAGE/ENGAGE封面图.jpg" alt="ENGAGE">
+            <h2 class="year">2023</h2>
+          </div>
+          <div class="text-box">
+            <h3>《ENGAGE》</h3>
+            <p>《火焰纹章：Engage》的舞台为艾雷欧斯大陆。
+              主角神龙琉尔为阻止邪龙复活而战，可通过戒指与异界英雄"纹章士"结合，
+              获得强大力量，并与各国伙伴共同展开冒险。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 子路由页面展示区域 - 全屏覆盖 -->
+    <router-view v-slot="{ Component, route }">
+      <transition name="slide" mode="out-in">
+        <component :is="Component" :key="route.path" />
+      </transition>
+    </router-view>
+
+    <!-- 返回按钮 - 仅在详情页显示 -->
+    <transition name="fade">
+      <button v-if="isInDetailPage" class="back-btn" @click="router.push('/works')">
+        ← 返回时间轴
+      </button>
+    </transition>
+  </div>
+</template>
+
 <style scoped>
-.timeline-page {
+.works-page {
   min-height: 100vh;
 }
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
   background-color: #1a1a2e;
   font-family: "Microsoft YaHei", sans-serif;
@@ -224,18 +256,39 @@ body {
   width: 100%;
   display: block;
   transition: 0.5s transform;
+  aspect-ratio: 16/9;
 }
 
-/* 年份文字 */
+.image-box.clickable {
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.image-box.clickable:hover {
+  transform: scale(1.02);
+  box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4);
+}
+
+.image-box img {
+  width: 100%;
+  display: block;
+  transition: 0.5s transform;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+}
+
+/* 年份文字 - 始终位于图片左下角 */
 .year {
   position: absolute;
-  bottom: -10px;
+  bottom: 10px;
   left: 10px;
   font-size: 80px;
   font-weight: 900;
   color: rgba(255, 255, 255, 0.8);
   text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
   pointer-events: none;
+  margin: 0;
+  line-height: 1;
 }
 
 .text-box {
@@ -269,5 +322,56 @@ body {
   .year {
     font-size: 50px;
   }
+}
+
+/* 页面过渡动画 */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* 返回按钮 */
+.back-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateX(5px);
+}
+
+/* 页面滑动过渡动画 */
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.3s ease;
+}
+
+.slide-enter-from {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+.slide-leave-to {
+  opacity: 0;
+  transform: translateX(-30px);
 }
 </style>

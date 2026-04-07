@@ -28,7 +28,34 @@ const router = createRouter({
     {
       path: '/works',
       name: 'works',
-      component: () => import('../views/WorksView.vue')
+      component: () => import('../views/WorksView.vue'),
+      children: [
+        {
+          path: 'binding-blade',
+          name: 'works-binding-blade',
+          component: () => import('../works/TheBindingBlade.vue')
+        },
+        {
+          path: 'blazing-blade',
+          name: 'works-blazing-blade',
+          component: () => import('../works/TheBlazingBlade.vue')
+        },
+        {
+          path: 'sacred-stones',
+          name: 'works-sacred-stones',
+          component: () => import('../works/TheSacredStones.vue')
+        },
+        {
+          path: 'three-houses',
+          name: 'works-three-houses',
+          component: () => import('../works/ThreeHouses.vue')
+        },
+        {
+          path: 'engage',
+          name: 'works-engage',
+          component: () => import('../works/FireEmblemEngage.vue')
+        }
+      ]
     },
     {
       path: '/systems',
