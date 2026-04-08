@@ -73,18 +73,96 @@
 </template>
 
 <style scoped>
-.game-guide { padding: 20px 0; }
-.section-title { font-size: 20px; color: #00d2ff; margin-bottom: 20px; padding-left: 15px; border-left: 3px solid #00d2ff; }
-.guide-section { margin-bottom: 30px; }
-.guide-section h3 { font-size: 18px; color: #fff; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
-.guide-content p { font-size: 14px; line-height: 1.8; color: rgba(255, 255, 255, 0.8); margin-bottom: 15px; }
-.guide-content ul { list-style: none; padding: 0; }
-.guide-content li { font-size: 14px; line-height: 1.8; color: rgba(255, 255, 255, 0.8); padding: 8px 0 8px 20px; position: relative; }
-.guide-content li::before { content: "•"; position: absolute; left: 0; color: #00d2ff; }
-.guide-content strong { color: #00d2ff; }
-.emblem-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
-.emblem-card { background: rgba(255, 255, 255, 0.05); border-radius: 10px; padding: 15px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.1); }
-.emblem-icon { font-size: 30px; display: block; margin-bottom: 8px; }
-.emblem-card span:not(.emblem-icon) { display: block; color: #fff; font-size: 14px; margin-bottom: 4px; }
-.emblem-card small { display: block; color: rgba(255, 255, 255, 0.6); font-size: 11px; }
+/* 攻略区域 */
+.game-guide {
+  padding: 20px 0;
+}
+
+/* 区域标题 */
+.section-title {
+  font-size: 20px;
+  color: #00d2ff;
+  margin-bottom: 20px;
+  padding-left: 15px;
+  border-left: 3px solid #00d2ff;
+}
+
+/* 攻略章节 */
+.guide-section {
+  margin-bottom: 30px;
+}
+
+.guide-section h3 {
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 15px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 攻略内容 */
+.guide-content p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 15px;
+}
+
+.guide-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.guide-content li {
+  font-size: 14px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 8px 0 8px 20px;
+  position: relative;
+}
+
+.guide-content li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #00d2ff;
+}
+
+.guide-content strong {
+  color: #00d2ff;
+}
+
+/* 纹章士网格 */
+.emblem-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.emblem-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.emblem-icon {
+  font-size: 30px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.emblem-card span:not(.emblem-icon) {
+  display: block;
+  color: #fff;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.emblem-card small {
+  display: block;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 11px;
+}
 </style>

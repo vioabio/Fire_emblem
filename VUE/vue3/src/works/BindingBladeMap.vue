@@ -3,28 +3,43 @@
   <div class="game-map">
     <h2 class="section-title">游戏地图</h2>
     <div class="map-container">
-      <div class="map-placeholder">
-        <div class="map-icon">🗺️</div>
-        <p>艾雷布大陆地图</p>
-      </div>
+      <img 
+        :src="mapImage" 
+        alt="艾雷布大陆地图" 
+        class="map-image"
+      />
     </div>
     <div class="map-info">
-      <h3>地图概述</h3>
-      <p>故事发生在一块名为艾雷布的大陆。这片大陆被分成了数个王国和势力，玩家将跟随主角罗伊的脚步，穿越这片广袤的土地，对抗邪恶的伯丹帝国。</p>
-    </div>
-    <div class="chapter-list">
-      <h3>章节列表</h3>
-      <ul>
-        <li>序章 - 首次战斗</li>
-        <li>第1章 - 沙漠奇袭</li>
-        <li>第2章 - 神秘男子</li>
-        <li>第3章 - 古代的王国</li>
-        <li>第4章 - 重新燃起的火焰</li>
-        <li>...</li>
-      </ul>
+      <h3>利西亚同盟</h3>
+      <p>位于大陆西部，由多个自治的骑士领主国联合组成，是故事开始的主角罗伊的故乡。同盟内部并非铁板一块，各领主国对贝伦帝国的威胁态度不一。</p>
+
+      <h3>贝伦帝国</h3>
+      <p>位于大陆东部，是一个军事专制、野心勃勃的帝国，由国王泽菲尔统治。帝国国力强盛，拥有强大的龙骑士部队，其入侵利西亚同盟的行为是游戏前半部分的主要冲突根源。</p>
+
+      <h3>伊利亚</h3>
+      <p>位于大陆北部，是一片常年被冰雪覆盖的苦寒之地。这里居住着被称为"伊利亚人"的部族，以强悍的战士和飞马骑士闻名。在游戏剧情中，伊利亚内部存在纷争，并卷入大陆战事。</p>
+
+      <h3>西部三岛</h3>
+      <p>位于大陆西南海域，包括<strong>奥斯提亚</strong>、<strong>贝伦群岛</strong>等。这些岛屿在游戏中后期剧情中扮演重要角色，是某些章节的战斗舞台。</p>
+
+      <h3>那巴尔</h3>
+      <p>一个独立的沙漠王国，位于大陆的偏远地区。其地理位置和环境（沙漠）构成了游戏中的特色关卡。</p>
     </div>
   </div>
 </template>
+
+<script>
+import mapImage from '@/assets/img/封印之剑/封印之剑大陆地图.jpg'
+
+export default {
+  name: 'BindingBladeMap',
+  data() {
+    return {
+      mapImage
+    }
+  }
+}
+</script>
 
 <style scoped>
 .game-map {
@@ -43,60 +58,32 @@
   margin-bottom: 25px;
 }
 
-.map-placeholder {
+.map-image {
   width: 100%;
-  height: 300px;
-  background: rgba(0, 0, 0, 0.3);
   border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 2px dashed rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-.map-icon {
-  font-size: 60px;
-  margin-bottom: 15px;
-}
-
-.map-placeholder p {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 16px;
-}
-
-.map-info,
-.chapter-list {
+.map-info {
   margin-bottom: 25px;
 }
 
-.map-info h3,
-.chapter-list h3 {
+.map-info h3 {
   font-size: 16px;
-  color: #fff;
+  color: #00d2ff;
   margin-bottom: 12px;
+  margin-top: 20px;
+}
+
+.map-info h3:first-child {
+  margin-top: 0;
 }
 
 .map-info p {
   font-size: 14px;
   line-height: 1.8;
   color: rgba(255, 255, 255, 0.8);
-  text-align: justify;
+  margin-bottom: 12px;
 }
 
-.chapter-list ul {
-  list-style: none;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 10px;
-}
-
-.chapter-list li {
-  padding: 10px 15px;
-  background: rgba(102, 126, 234, 0.15);
-  border-radius: 8px;
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 14px;
-}
 </style>

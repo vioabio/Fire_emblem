@@ -65,15 +65,85 @@
 </template>
 
 <style scoped>
-.game-characters { padding: 20px 0; }
-.section-title { font-size: 20px; color: #00d2ff; margin-bottom: 20px; padding-left: 15px; border-left: 3px solid #00d2ff; }
-.houses-grid { display: flex; flex-direction: column; gap: 25px; }
-.house-section { background: rgba(255, 255, 255, 0.03); border-radius: 12px; padding: 20px; }
-.house-title { font-size: 18px; color: #fff; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
-.character-card { background: rgba(255, 255, 255, 0.05); border-radius: 10px; padding: 15px; display: flex; gap: 12px; margin-bottom: 12px; border: 1px solid rgba(255, 255, 255, 0.1); }
-.character-card:last-child { margin-bottom: 0; }
-.character-avatar { font-size: 32px; width: 50px; height: 50px; background: rgba(102, 126, 234, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.character-info h3 { font-size: 16px; color: #fff; margin-bottom: 3px; }
-.character-class { font-size: 12px; color: #00d2ff; margin-bottom: 5px; }
-.character-desc { font-size: 12px; line-height: 1.5; color: rgba(255, 255, 255, 0.7); }
+/* 人物区域 */
+.game-characters {
+  padding: 20px 0;
+}
+
+/* 区域标题 */
+.section-title {
+  font-size: 20px;
+  color: #00d2ff;
+  margin-bottom: 20px;
+  padding-left: 15px;
+  border-left: 3px solid #00d2ff;
+}
+
+/* 学级分区 */
+.houses-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.house-section {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.house-title {
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 人物卡片 */
+.character-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 15px;
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.character-card:last-child {
+  margin-bottom: 0;
+}
+
+/* 人物头像 */
+.character-avatar {
+  font-size: 32px;
+  width: 50px;
+  height: 50px;
+  background: rgba(102, 126, 234, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* 人物信息 */
+.character-info h3 {
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 3px;
+}
+
+.character-class {
+  font-size: 12px;
+  color: #00d2ff;
+  margin-bottom: 5px;
+}
+
+.character-desc {
+  font-size: 12px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.7);
+}
 </style>

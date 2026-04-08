@@ -4,6 +4,9 @@
     <div class="game-detail-container">
       <!-- 主界面：游戏基础信息 -->
       <div class="game-header">
+        <!-- 返回按钮 -->
+        <button class="header-back-btn" @click="router.push('/works')">←</button>
+        
         <img src="@/assets/img/封印之剑/封印之剑封面图.jpg" alt="封印之剑" class="game-cover">
         <div class="game-info">
           <h1 class="game-title">《火焰之纹章：封印之剑》</h1>
@@ -115,6 +118,34 @@ function switchTab(path) {
   margin-bottom: 30px;
   padding-bottom: 30px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+/* 返回按钮 - 放在game-header右上角 */
+.header-back-btn {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.header-back-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  transform: scale(1.1);
 }
 
 .game-cover {
@@ -209,6 +240,7 @@ function switchTab(path) {
 
 .game-content {
   min-height: 400px;
+  padding-bottom: 80px;
 }
 
 /* 过渡动画 */

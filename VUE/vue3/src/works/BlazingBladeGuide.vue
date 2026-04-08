@@ -40,16 +40,85 @@
 </template>
 
 <style scoped>
-.game-guide { padding: 20px 0; }
-.section-title { font-size: 20px; color: #00d2ff; margin-bottom: 20px; padding-left: 15px; border-left: 3px solid #00d2ff; }
-.guide-section { margin-bottom: 30px; }
-.guide-section h3 { font-size: 18px; color: #fff; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
-.guide-content p { font-size: 14px; line-height: 1.8; color: rgba(255, 255, 255, 0.8); margin-bottom: 15px; }
-.guide-content ul { list-style: none; padding: 0; }
-.guide-content li { font-size: 14px; line-height: 1.8; color: rgba(255, 255, 255, 0.8); padding: 8px 0 8px 20px; position: relative; }
-.guide-content li::before { content: "•"; position: absolute; left: 0; color: #00d2ff; }
-.guide-content strong { color: #00d2ff; }
-.support-tips { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 10px; }
-.tip { display: flex; align-items: center; gap: 8px; padding: 10px 15px; background: rgba(102, 126, 234, 0.15); border-radius: 8px; font-size: 13px; color: rgba(255, 255, 255, 0.85); }
-.tip-icon { font-size: 18px; }
+/* 攻略区域 */
+.game-guide {
+  padding: 20px 0;
+}
+
+/* 区域标题 */
+.section-title {
+  font-size: 20px;
+  color: #00d2ff;
+  margin-bottom: 20px;
+  padding-left: 15px;
+  border-left: 3px solid #00d2ff;
+}
+
+/* 攻略章节 */
+.guide-section {
+  margin-bottom: 30px;
+}
+
+.guide-section h3 {
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 15px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 攻略内容 */
+.guide-content p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 15px;
+}
+
+.guide-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.guide-content li {
+  font-size: 14px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 8px 0 8px 20px;
+  position: relative;
+}
+
+.guide-content li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #00d2ff;
+}
+
+.guide-content strong {
+  color: #00d2ff;
+}
+
+/* 支援提示 */
+.support-tips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.tip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 15px;
+  background: rgba(102, 126, 234, 0.15);
+  border-radius: 8px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.tip-icon {
+  font-size: 18px;
+}
 </style>

@@ -162,13 +162,6 @@ onUnmounted(() => {
         <component :is="Component" :key="route.path" />
       </transition>
     </router-view>
-
-    <!-- 返回按钮 - 仅在详情页显示 -->
-    <transition name="fade">
-      <button v-if="isInDetailPage" class="back-btn" @click="router.push('/works')">
-        ← 返回时间轴
-      </button>
-    </transition>
   </div>
 </template>
 
@@ -333,30 +326,6 @@ body {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
-}
-
-/* 返回按钮 */
-.back-btn {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  padding: 12px 24px;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 30px;
-  cursor: pointer;
-  font-size: 15px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  z-index: 1000;
-}
-
-.back-btn:hover {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 255, 255, 0.5);
-  transform: translateX(5px);
 }
 
 /* 页面滑动过渡动画 */
