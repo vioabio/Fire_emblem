@@ -1,149 +1,206 @@
-<!-- 风花雪月 - 登场人物 -->
 <template>
-  <div class="game-characters">
-    <h2 class="section-title">登场人物</h2>
-    <div class="houses-grid">
-      <div class="house-section">
-        <h3 class="house-title">🔥 青狮线</h3>
-        <div class="character-card">
-          <div class="character-avatar">👑</div>
-          <div class="character-info">
-            <h3>帝弥托利</h3>
-            <p class="character-class">王子</p>
-            <p class="character-desc">法嘉圣国的王子，性格正直热血，领导青狮学级的学生们。</p>
+  <div class="character-display-page">
+    <!-- 主内容区域 -->
+    <main class="main-content">
+      <h1>游戏登场人物</h1>
+      <!-- 循环渲染各个势力分组 -->
+      <div 
+        v-for="group in characterGroups" 
+        :key="group.id" 
+        :id="group.id" 
+        class="character-group"
+      >
+        <h2 class="group-title">{{ group.name }}</h2>
+        <div 
+          v-for="char in group.characters" 
+          :key="char.name" 
+          class="character-card"
+        >
+          <!-- 左侧角色图片区域 -->
+          <div class="char-image-wrapper">
+            <div class="char-image-container">
+              <img 
+                :src="char.image || 'https://placehold.co/280x400/f0f0f0/999?text=角色图'" 
+                :alt="char.name" 
+                class="char-main-image"
+              >
+            </div>
+            <p class="char-name-below">{{ char.name }}</p>
           </div>
-        </div>
-        <div class="character-card">
-          <div class="character-avatar">⚔️</div>
-          <div class="character-info">
-            <h3>菲力克斯</h3>
-            <p class="character-class">剑士</p>
-            <p class="character-desc">孤高的剑术天才，嘴硬心软，是帝弥托利的童年好友。</p>
-          </div>
-        </div>
-      </div>
-      <div class="house-section">
-        <h3 class="house-title">🌙 金鹿线</h3>
-        <div class="character-card">
-          <div class="character-avatar">💎</div>
-          <div class="character-info">
-            <h3>库罗德</h3>
-            <p class="character-class">贵族</p>
-            <p class="character-desc">金鹿学级的领主，精明能干，是商人之子，外表温和内心复杂。</p>
-          </div>
-        </div>
-        <div class="character-card">
-          <div class="character-avatar">📚</div>
-          <div class="character-info">
-            <h3>洛廉兹</h3>
-            <p class="character-class">法师</p>
-            <p class="character-desc">贵族出身的魔法使，重视礼仪有些傲慢，但内心善良。</p>
-          </div>
-        </div>
-      </div>
-      <div class="house-section">
-        <h3 class="house-title">🦅 黑鹫线</h3>
-        <div class="character-card">
-          <div class="character-avatar">🦅</div>
-          <div class="character-info">
-            <h3>艾黛尔贾特</h3>
-            <p class="character-class">皇女</p>
-            <p class="character-desc">艾德蒙帝国的皇女，领导黑鹫学级，有着改革世界的强烈意志。</p>
-          </div>
-        </div>
-        <div class="character-card">
-          <div class="character-avatar">🖤</div>
-          <div class="character-info">
-            <h3>贝雷丝</h3>
-            <p class="character-class">教师</p>
-            <p class="character-desc">士官学校的教师，失去记忆的神秘人物，玩家扮演的主角。</p>
+
+          <!-- 右侧角色介绍区域 -->
+          <div class="char-info">
+            <h3 class="char-name">
+              {{ char.name }}
+              <span class="char-cv">CV：{{ char.cv.join('、') }}</span>
+            </h3>
+            <p class="char-desc">{{ char.desc }}</p>
           </div>
         </div>
       </div>
-    </div>
+    </main>
   </div>
 </template>
 
+<script setup>
+import { ref } from 'vue'
+
+// 角色数据：你可以在这里新增/修改角色、扩展势力
+const characterGroups = ref([
+  {
+    id: '主角团',
+    name: '主角团',
+    characters: [
+      {
+        name: '男女主角',
+        cv: ['小林裕介', '伊藤静'],
+        desc: '曾经待在其父杰拉尔特所率领的佣兵团中，因为救出了被盗贼袭击的士官学校学生，其能力得到赏识，遂被邀请至加尔古·玛库大修道院担任教师。游戏开始时可以选择性别，性别不会对能力值产生影响。',
+        image: 'https://placehold.co/280/350?text=男女主角'
+      },
+      {
+        name: '苏谛斯',
+        cv: ['黑泽朋世'],
+        desc: '出现在主角梦境中的存在。自从使用回溯时间的能力拯救主角后，便如同住在主角脑海中一般，能够与主角进行交谈，但除了主角之外没有人察觉到她的存在。她完全不记得自己的身份，虽然外表看起来是一名年幼的少女，但说话的口气却完全是个老婆婆。',
+        image: 'https://placehold.co/280/400?text=苏谛斯'
+      }
+    ]
+  },
+  {
+    id: '黑鹫学级',
+    name: '黑鹫学级',
+    characters: [
+      {
+        name: '修伯特·冯·贝斯特拉',
+        cv: ['小西克幸'],
+        desc: '黑鹫学级的参谋。自幼年时期便侍奉艾黛尔贾特的贝斯特拉侯爵家的嫡子。会不择手段地排除阻碍艾黛尔贾特的人。按照艾黛尔贾特的说法，他是个「冷酷但通情达理」的人。',
+        image: 'https://placehold.co/280/350?text=修伯特'
+      },
+      {
+        name: '多洛缇雅·雅尔诺尔德',
+        cv: ['长妻树里'],
+        desc: '入学前是帝都的人气歌姬。十分尊敬同样出身于米提尔法兰克歌剧团的玛努艾拉前辈。黑鹫学级内只有她是平民出身，虽然有时会感到有些格格不入，但她把任何人都当做是和自己同龄的朋友般平等对待。',
+        image: 'https://placehold.co/280/350?text=多洛缇雅'
+      },
+      {
+        name: '菲尔迪南特·冯·艾吉尔',
+        cv: ['坂泰斗'],
+        desc: '艾吉尔大公家的长子，以贵族身份为荣，一直和艾黛尔贾特竞争皇储之位，性格积极好胜。',
+        image: 'https://placehold.co/280/350?text=菲尔迪南特'
+      }
+    ]
+  },
+  { id: '金鹿学级', name: '金鹿学级', characters: [] },
+  { id: '青狮子学级', name: '青狮子学级', characters: [] },
+  { id: '赛罗司教', name: '赛罗司教', characters: [] },
+  { id: '其他势力', name: '其他势力', characters: [] },
+])
+</script>
+
 <style scoped>
-/* 人物区域 */
-.game-characters {
-  padding: 20px 0;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* 区域标题 */
-.section-title {
-  font-size: 20px;
-  color: #00d2ff;
-  margin-bottom: 20px;
-  padding-left: 15px;
-  border-left: 3px solid #00d2ff;
-}
-
-/* 学级分区 */
-.houses-grid {
+.character-display-page {
   display: flex;
-  flex-direction: column;
-  gap: 25px;
-}
-
-.house-section {
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 12px;
+  min-height: 100vh;
   padding: 20px;
+  background: #fff;
+  font-family: system-ui, -apple-system, sans-serif;
 }
 
-.house-title {
-  font-size: 18px;
-  color: #fff;
-  margin-bottom: 15px;
+.main-content {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.main-content h1 {
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: #2c3e50;
+  border-bottom: 1px solid #eee;
   padding-bottom: 10px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* 人物卡片 */
+.character-group {
+  margin-bottom: 40px;
+}
+
+.group-title {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: #2c3e50;
+  padding-left: 10px;
+  border-left: 4px solid #409eff;
+}
+
 .character-card {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
-  padding: 15px;
   display: flex;
-  gap: 12px;
-  margin-bottom: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f0f0f0;
 }
 
-.character-card:last-child {
-  margin-bottom: 0;
-}
-
-/* 人物头像 */
-.character-avatar {
-  font-size: 32px;
-  width: 50px;
-  height: 50px;
-  background: rgba(102, 126, 234, 0.2);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.char-image-wrapper {
   flex-shrink: 0;
+  width: 280px;
+  text-align: center;
 }
 
-/* 人物信息 */
-.character-info h3 {
+.char-image-container {
+  margin-bottom: 10px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.char-main-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: #f5f5f5;
+}
+
+.char-name-below {
   font-size: 16px;
-  color: #fff;
-  margin-bottom: 3px;
+  color: #666;
+  margin-top: 8px;
 }
 
-.character-class {
-  font-size: 12px;
-  color: #00d2ff;
-  margin-bottom: 5px;
+.char-info {
+  flex: 1;
+  padding-top: 10px;
 }
 
-.character-desc {
-  font-size: 12px;
-  line-height: 1.5;
-  color: rgba(255, 255, 255, 0.7);
+.char-name {
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: #2c3e50;
+}
+
+.char-cv {
+  font-size: 16px;
+  font-weight: normal;
+  color: #409eff;
+  margin-left: 12px;
+}
+
+.char-desc {
+  font-size: 17px;
+  line-height: 1.8;
+  color: #444;
+}
+
+/* 移动端适配 */
+@media screen and (max-width: 768px) {
+  .character-card {
+    flex-direction: column;
+  }
+  .char-image-wrapper {
+    width: 100%;
+  }
 }
 </style>
