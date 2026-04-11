@@ -44,7 +44,7 @@ const router = useRouter()
 const tabs = [
   { path: 'map', name: '游戏地图', icon: '🗺️', component: defineAsyncComponent(() => import('./ThreeHousesMap.vue')) },
   { path: 'characters', name: '登场人物', icon: '👥', component: defineAsyncComponent(() => import('./ThreeHousesCharacters.vue')) },
-  { path: 'guide', name: '游戏攻略', icon: '📖', component: defineAsyncComponent(() => import('./ThreeHousesGuide.vue')) }
+  { path: 'guide', name: '物品道具', icon: '📖', component: defineAsyncComponent(() => import('./ThreeHousesGuide.vue')) }
 ]
 const currentTab = ref('map')
 const currentComponent = computed(() => tabs.find(t => t.path === currentTab.value)?.component || tabs[0].component)
