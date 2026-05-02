@@ -1,5 +1,5 @@
 <script setup>
-import Vestaria from '@/assets/img/vestaria.jpg'
+import Vestaria from '@/assetsvestaria.jpg'
 import LucaVillage from '@/assets/img/Vestaria Saga外传：卢卡村的勇者.webp'
 import VestariaSaga from '@/assets/img/VestariaSaga：亡国骑士与星辰巫女.webp'
 
